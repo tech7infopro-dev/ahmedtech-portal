@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AHMEDTECH - Private Portal</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: url('grok_image_x959hot.jpg') no-repeat center center fixed;
+        background-size: cover;
+        color: white;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow-x: hidden;
+        position: relative;
+    }
+    body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: rgba(10, 10, 35, 0.85);
+        z-index: -1;
+    }
+    
+    .phantom-logo {
+        text-align: center;
+        padding: 15px;
+        margin: 15px auto 20px;
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 15px;
+        border: 2px solid rgba(0, 255, 255, 0.4);
+        max-width: 320px;
+        backdrop-filter: blur(10px);
+    }
+    .phantom-text {
+        font-size: 24px;
+        font-weight: bold;
+        color: #ff4444;
+        margin-bottom: 5px;
+        text-shadow: 0 0 10px rgba(255, 107, 107, 0.8);
+        letter-spacing: 1px;
+    }
+    .dz-iptv-main {
+        font-size: 28px;
+        font-weight: 900;
+        color: #ffcc00;
+        margin-bottom: 5px;
+        text-shadow: 0 0 10px rgba(255, 204, 0, 0.8);
+        letter-spacing: 1px;
+    }
+    .by-ahmed {
+        font-size: 16px;
+        color: #00ccff;
+        font-style: italic;
+        text-shadow: 0 0 8px rgba(0, 204, 255, 0.8);
+        margin-top: 5px;
+    }
+
+    .container, .dashboard {
+        background: rgba(10,10,35,0.95);
+        border: 2px solid #00ffff;
+        border-radius: 20px;
+        padding: 1.5rem;
+        width: 95%;
+        max-width: 420px;
+        text-align: center;
+        box-shadow: 0 0 30px rgba(0,255,255,0.6);
+        backdrop-filter: blur(12px);
+        margin: 15px auto;
+    }
+    .hidden { display: none !important; }
+
+    .logo-circle {
+        width: 90px; height: 90px;
+        margin: 0 auto 12px;
+        background: radial-gradient(circle, #00ffff, #0088ff);
+        border: 3px solid #00ffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 25px #00ffff;
+        animation: spin 4s linear infinite;
+        border-radius: 50%;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .logo-icon { font-size: 2.2rem; color: #000; }
+
+    h1.title {
+        font-size: 1.8rem;
+        background: linear-gradient(45deg, #00ffff, #00ff80);
+        -webkit-background-clip: text;
+        color: transparent;
+        margin: 6px 0;
+    }
+
+    /* Date and Time Styles */
+    .datetime-container {
+        background: rgba(0,0,0,0.4);
+        border: 1px solid #00ffff;
+        border-radius: 10px;
+        padding: 10px 15px;
+        margin: 10px 0;
+        text-align: center;
+    }
+    
+    .current-date {
+        font-size: 1rem;
+        color: #00ff80;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    
+    .current-time {
+        font-size: 1.4rem;
+        color: #00ffff;
+        font-weight: bold;
+        text-shadow: 0 0 10px rgba(0,255,255,0.7);
+    }
+
+    .choice-group { display: flex; justify-content: center; gap: 15px; margin: 12px 0; }
+    .choice-label { font-size: 0.9rem; cursor: pointer; padding: 6px 12px; border-radius: 6px; transition: all 0.3s; }
+    .choice-label:hover { background: rgba(0,255,255,0.1); }
+    .choice-label input { display: none; }
+    .choice-label input:checked + span { color: #00ff80; text-shadow: 0 0 10px #00ff80; }
+
+    .input-group { margin: 10px 0; text-align: left; }
+    .input-group label { display: block; margin-bottom: 5px; color: #00ffff; font-size: 0.85rem; }
+    .input-group input {
+        width: 100%; padding: 10px; border: 2px solid #00ffff; border-radius: 8px;
+        background: rgba(255,255,255,0.08); color: white; font-size: 0.9rem;
+    }
+    .input-group input:focus { outline: none; border-color: #00ff80; box-shadow: 0 0 12px rgba(0,255,128,0.6); }
+
+    .neon-btn {
+        width: 100%; padding: 11px; margin: 8px 0; border: none; border-radius: 8px;
+        background: linear-gradient(45deg, #00ffff, #00ff80); color: #000;
+        font-size: 0.95rem; cursor: pointer; font-weight: bold; transition: 0.3s;
+        box-shadow: 0 0 20px #00ffff;
+    }
+    .neon-btn:hover { transform: scale(1.03); box-shadow: 0 0 30px #00ff80; }
+
+    .section-card {
+        background: rgba(0,0,0,0.4); border: 2px solid #00ffff; border-radius: 12px;
+        padding: 15px; margin: 12px 0; transition: transform 0.3s; cursor: pointer;
+    }
+    .section-card:hover { transform: translateY(-5px); }
+    .section-title { color: #00ffff; margin-bottom: 8px; font-size: 0.95rem; }
+
+    .mac-item {
+        background: rgba(255,255,255,0.08); 
+        padding: 15px; 
+        margin: 12px 0; 
+        border-radius: 10px;
+        border-left: 4px solid #00ff80;
+        position: relative;
+    }
+    
+    .server-mac-box {
+        background: rgba(0,0,0,0.3);
+        border-radius: 8px;
+        padding: 12px;
+        border: 1px solid rgba(0,255,255,0.2);
+        margin: 12px 0;
+        text-align: center;
+    }
+    
+    .server-url, .mac-address {
+        font-family: monospace;
+        background: rgba(255,255,255,0.05);
+        padding: 10px;
+        border-radius: 6px;
+        margin: 6px 0;
+        word-break: break-all;
+        border: 1px solid rgba(0,255,255,0.3);
+        font-size: 0.85rem;
+        color: #00ffff;
+    }
+    
+    .copy-buttons {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+    }
+    
+    .copy-btn { 
+        background: #00ff80; 
+        color: #000; 
+        padding: 8px 12px; 
+        border-radius: 6px;
+        border: none; 
+        cursor: pointer; 
+        font-weight: bold; 
+        transition: 0.3s;
+        flex: 1;
+        font-size: 0.8rem;
+    }
+    .copy-btn:hover { background: #00ffff; }
+
+    .user-card {
+        background: rgba(0,255,255,0.08);
+        border: 1px solid rgba(0,255,255,0.5);
+        border-radius: 10px;
+        padding: 12px 15px;
+        margin: 10px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 3px 12px rgba(0,255,255,0.15);
+        transition: all 0.3s;
+    }
+    .user-card:hover { background: rgba(0,255,255,0.15); transform: translateY(-3px); }
+    .user-name { color: #00ffff; font-weight: bold; font-size: 0.9rem; }
+    .delete-btn { 
+        background: #ff4444; color: white; padding: 6px 15px; border-radius: 8px;
+        border: none; cursor: pointer; transition: 0.3s; font-size: 0.8rem;
+    }
+    .delete-btn:hover { background: #ff6666; }
+
+    .notif {
+        position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+        background: #00ff80; color: #000; padding: 12px 30px; border-radius: 12px;
+        font-weight: bold; z-index: 9999; box-shadow: 0 0 25px #00ff80; display: none;
+        font-size: 0.85rem;
+    }
+    
+    .empty-users {
+        color: #888;
+        font-style: italic;
+        padding: 15px;
+        font-size: 0.85rem;
+    }
+    
+    .admin-only {
+        display: none;
+    }
+    
+    .back-btn {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        background: #0088ff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 6px 12px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.3s;
+        font-size: 0.8rem;
+    }
+    
+    .back-btn:hover {
+        background: #00aaff;
+        transform: scale(1.05);
+    }
+    
+    .logout-btn {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: #ff4444;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 6px 12px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.3s;
+        font-size: 0.8rem;
+    }
+    
+    .logout-btn:hover {
+        background: #ff6666;
+        transform: scale(1.05);
+    }
+    
+    .add-portal-btn, .add-video-btn {
+        background: #ff9500;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 8px 15px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.3s;
+        margin: 8px 0;
+        font-size: 0.85rem;
+    }
+    
+    .add-portal-btn:hover, .add-video-btn:hover {
+        background: #ffaa33;
+        transform: scale(1.05);
+    }
+    
+    .portal-form, .video-form {
+        background: rgba(0,0,0,0.5);
+        border: 2px solid #00ffff;
+        border-radius: 12px;
+        padding: 15px;
+        margin: 12px 0;
+        text-align: left;
+    }
+    
+    .portal-form input, .video-form input, .video-form textarea {
+        width: 100%;
+        padding: 8px;
+        margin: 6px 0;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid #00ffff;
+        border-radius: 6px;
+        color: white;
+        font-size: 0.85rem;
+    }
+    
+    .video-form textarea {
+        height: 80px;
+        resize: vertical;
+    }
+    
+    .portal-form-buttons, .video-form-buttons {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+    }
+    
+    .portal-form-buttons button, .video-form-buttons button {
+        flex: 1;
+        padding: 8px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 0.8rem;
+    }
+    
+    .save-portal-btn, .save-video-btn {
+        background: #00ff80;
+        color: #000;
+    }
+    
+    .cancel-portal-btn, .cancel-video-btn {
+        background: #ff4444;
+        color: white;
+    }
+    
+    .delete-portal-btn, .delete-video-btn {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background: #ff4444;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+    }
+
+    /* Video Styles */
+    .video-item {
+        background: rgba(255,255,255,0.08);
+        padding: 15px;
+        margin: 12px 0;
+        border-radius: 10px;
+        border-left: 4px solid #ff9500;
+        position: relative;
+    }
+    
+    .video-title {
+        color: #00ff80;
+        font-weight: bold;
+        margin-bottom: 8px;
+        font-size: 1rem;
+    }
+    
+    .video-description {
+        color: #ccc;
+        font-size: 0.85rem;
+        margin-bottom: 12px;
+    }
+    
+    .video-preview {
+        width: 100%;
+        height: 200px;
+        background: #000;
+        border-radius: 8px;
+        margin: 10px 0;
+        border: 1px solid rgba(0,255,255,0.3);
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .video-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .play-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: background 0.3s;
+    }
+    
+    .play-overlay:hover {
+        background: rgba(0,0,0,0.3);
+    }
+    
+    .play-icon {
+        font-size: 3rem;
+        color: #00ff80;
+        text-shadow: 0 0 20px rgba(0,255,128,0.7);
+    }
+    
+    .video-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+    }
+    
+    .watch-btn {
+        width: 100%;
+        padding: 10px;
+        background: #0088ff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 0.9rem;
+        transition: 0.3s;
+    }
+    
+    .watch-btn:hover {
+        background: #00aaff;
+        transform: scale(1.03);
+    }
+
+    /* Video Player */
+    .video-player-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.95);
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+    
+    .video-player-container {
+        width: 100%;
+        max-width: 800px;
+        background: rgba(10,10,35,0.95);
+        border-radius: 15px;
+        border: 2px solid #00ffff;
+        box-shadow: 0 0 30px rgba(0,255,255,0.6);
+        overflow: hidden;
+    }
+    
+    .video-player-header {
+        padding: 15px;
+        background: rgba(0,0,0,0.7);
+        border-bottom: 1px solid #00ffff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .video-player-title {
+        color: #00ff80;
+        font-weight: bold;
+        font-size: 1.1rem;
+    }
+    
+    .close-player {
+        background: #ff4444;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 8px 15px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+    
+    .close-player:hover {
+        background: #ff6666;
+        transform: scale(1.05);
+    }
+    
+    .video-player-content {
+        width: 100%;
+        height: 400px;
+    }
+    
+    .video-player-content iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+    
+    .video-player-description {
+        padding: 15px;
+        background: rgba(0,0,0,0.5);
+        border-top: 1px solid #00ffff;
+        color: #ccc;
+        font-size: 0.9rem;
+    }
+
+    /* Error Message */
+    .video-error {
+        background: rgba(255,68,68,0.1);
+        border: 1px solid #ff4444;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 10px 0;
+        text-align: center;
+    }
+    
+    .error-message {
+        color: #ff8888;
+        margin-bottom: 10px;
+    }
+    
+    .external-link {
+        background: #0088ff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 10px 15px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.3s;
+        text-decoration: none;
+        display: inline-block;
+    }
+    
+    .external-link:hover {
+        background: #00aaff;
+        transform: scale(1.05);
+    }
+
+    /* New styles for file uploads */
+    .video-source-choice {
+        display: flex;
+        gap: 15px;
+        margin: 10px 0;
+        justify-content: center;
+    }
+    
+    .source-option {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+        padding: 5px 10px;
+        border-radius: 6px;
+        transition: background 0.3s;
+    }
+    
+    .source-option:hover {
+        background: rgba(0,255,255,0.1);
+    }
+    
+    .source-option input {
+        display: none;
+    }
+    
+    .source-option input:checked + span {
+        color: #00ff80;
+    }
+    
+    .file-input-container {
+        margin: 10px 0;
+        text-align: left;
+    }
+    
+    .file-input-label {
+        display: block;
+        margin-bottom: 5px;
+        color: #00ffff;
+        font-size: 0.85rem;
+    }
+    
+    .file-input {
+        width: 100%;
+        padding: 8px;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid #00ffff;
+        border-radius: 6px;
+        color: white;
+        font-size: 0.85rem;
+        cursor: pointer;
+    }
+    
+    .file-input::file-selector-button {
+        background: #0088ff;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+    
+    .upload-info {
+        font-size: 0.8rem;
+        color: #ff9500;
+        margin-top: 5px;
+        text-align: center;
+    }
+    
+    .local-video-indicator {
+        background: #0088ff;
+        color: white;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 0.7rem;
+        margin-left: 8px;
+    }
+
+    /* Mobile improvements */
+    @media (max-width: 480px) {
+        .container, .dashboard {
+            padding: 1rem;
+            width: 98%;
+            margin: 10px auto;
+        }
+        
+        .phantom-logo {
+            padding: 12px;
+            margin: 10px auto 15px;
+        }
+        
+        .phantom-text {
+            font-size: 20px;
+        }
+        
+        .dz-iptv-main {
+            font-size: 24px;
+        }
+        
+        .by-ahmed {
+            font-size: 14px;
+        }
+        
+        .logo-circle {
+            width: 80px;
+            height: 80px;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+        }
+        
+        h1.title {
+            font-size: 1.6rem;
+        }
+        
+        .copy-buttons {
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .copy-btn {
+            padding: 10px;
+        }
+        
+        .user-card {
+            flex-direction: column;
+            gap: 8px;
+            text-align: center;
+        }
+        
+        .delete-btn {
+            width: 100%;
+        }
+        
+        .video-preview {
+            height: 180px;
+        }
+        
+        .video-player-content {
+            height: 250px;
+        }
+        
+        .video-player-container {
+            margin: 10px;
+        }
+        
+        .current-date {
+            font-size: 0.9rem;
+        }
+        
+        .current-time {
+            font-size: 1.2rem;
+        }
+    }
+
+    @media (max-width: 360px) {
+        .container, .dashboard {
+            padding: 0.8rem;
+        }
+        
+        .phantom-text {
+            font-size: 18px;
+        }
+        
+        .dz-iptv-main {
+            font-size: 22px;
+        }
+        
+        h1.title {
+            font-size: 1.4rem;
+        }
+        
+        .section-card {
+            padding: 12px;
+        }
+        
+        .mac-item, .video-item {
+            padding: 12px;
+        }
+        
+        .video-preview {
+            height: 160px;
+        }
+        
+        .video-player-content {
+            height: 200px;
+        }
+        
+        .current-date {
+            font-size: 0.8rem;
+        }
+        
+        .current-time {
+            font-size: 1.1rem;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="container" id="auth">
+    <div class="phantom-logo">
+        <div class="phantom-text">THE PHANTOM</div>
+        <div class="dz-iptv-main">DZ-IPTV</div>
+        <div class="by-ahmed">BY AHMED-DZ</div>
+    </div>
+
+    <div class="logo-circle"><i class="fas fa-shield-alt logo-icon"></i></div>
+    <h1 class="title">AHMEDTECH</h1>
+
+    <!-- Date and Time Display -->
+    <div class="datetime-container">
+        <div class="current-date" id="currentDate">Loading date...</div>
+        <div class="current-time" id="currentTime">Loading time...</div>
+    </div>
+
+    <div class="choice-group">
+        <label class="choice-label"><input type="radio" name="auth" value="login" checked><span>Login</span></label>
+        <label class="choice-label"><input type="radio" name="auth" value="signup"><span>Sign Up</span></label>
+    </div>
+
+    <div class="input-group">
+        <label>Username</label>
+        <input type="text" id="username" placeholder="Enter username">
+    </div>
+    <div class="input-group">
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Enter password">
+    </div>
+    <div class="input-group" id="confirmDiv" style="display:none">
+        <label>Confirm Password</label>
+        <input type="password" id="confirmPassword" placeholder="Re-enter password">
+    </div>
+
+    <button class="neon-btn" onclick="auth()">Login</button>
+    <p style="margin-top:8px; font-size:0.85rem"><a href="#" onclick="forgotPass()" style="color:#00ffff;text-decoration:none">Forgot Password?</a></p>
+</div>
+
+<!-- Main Dashboard -->
+<div class="dashboard hidden" id="dash">
+    <div class="phantom-logo">
+        <div class="phantom-text">THE PHANTOM</div>
+        <div class="dz-iptv-main">DZ-IPTV</div>
+        <div class="by-ahmed">BY AHMED-DZ</div>
+    </div>
+
+    <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    <div class="logo-circle"><i class="fas fa-user-circle logo-icon"></i></div>
+    <h1 class="title">Dashboard</h1>
+    
+    <!-- Date and Time Display -->
+    <div class="datetime-container">
+        <div class="current-date" id="dashboardDate">Loading date...</div>
+        <div class="current-time" id="dashboardTime">Loading time...</div>
+    </div>
+    
+    <h2 style="color:#00ffff;margin:15px 0; font-size:1rem">Welcome <span id="welcomeUser"></span></h2>
+    
+    <div class="section-card" onclick="show('macs')">
+        <i class="fas fa-satellite-dish" style="font-size:2.2rem;color:#00ff80"></i>
+        <h3 class="section-title">Free MACs</h3>
+    </div>
+    
+    <div class="section-card" onclick="show('users')" id="adminSection" style="display:none">
+        <i class="fas fa-users" style="font-size:2.2rem;color:#0088ff"></i>
+        <h3 class="section-title">User Management</h3>
+    </div>
+    
+    <div class="section-card" onclick="show('videos')">
+        <i class="fas fa-video" style="font-size:2.2rem;color:#ff9500"></i>
+        <h3 class="section-title">Tutorial Videos</h3>
+    </div>
+    
+    <div class="section-card" onclick="window.open('https://t.me/+IvjWx9QcwyQxYmI8','_blank')">
+        <i class="fas fa-paper-plane" style="font-size:2.2rem;color:#0088ff"></i>
+        <h3 class="section-title">Telegram Channel</h3>
+    </div>
+</div>
+
+<!-- Free MACs Page -->
+<div class="dashboard hidden" id="macs">
+    <div class="phantom-logo">
+        <div class="phantom-text">THE PHANTOM</div>
+        <div class="dz-iptv-main">DZ-IPTV</div>
+        <div class="by-ahmed">BY AHMED-DZ</div>
+    </div>
+
+    <button class="back-btn" onclick="goBack()">← Back</button>
+    <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    <div class="logo-circle"><i class="fas fa-satellite-dish logo-icon"></i></div>
+    <h1 class="title">Free MACs</h1>
+    
+    <button class="add-portal-btn" id="addPortalBtn" style="display:none" onclick="togglePortalForm()">
+        <i class="fas fa-plus"></i> Add New Portal
+    </button>
+    
+    <div class="portal-form" id="portalForm" style="display:none">
+        <h3 style="color:#00ffff;margin-bottom:12px; font-size:0.95rem">Add New Portal</h3>
+        <input type="text" id="portalName" placeholder="Portal name (e.g., Free Package)">
+        <input type="text" id="portalServer" placeholder="Server URL (e.g., http://foxx-tv.com:80/c/)">
+        <input type="text" id="portalMac" placeholder="MAC Address (e.g., 00:1A:79:00:00:00)">
+        <div class="portal-form-buttons">
+            <button class="save-portal-btn" onclick="savePortal()">Save Portal</button>
+            <button class="cancel-portal-btn" onclick="togglePortalForm()">Cancel</button>
+        </div>
+    </div>
+    
+    <div class="mac-item">
+        <h3 class="section-title">Free Package</h3>
+        
+        <div class="server-mac-box">
+            <div class="server-url">http://foxx-tv.com:80/c/</div>
+            <div class="mac-address">00:1A:79:00:00:00</div>
+            
+            <div class="copy-buttons">
+                <button class="copy-btn" onclick="copy('http://foxx-tv.com:80/c/')">Copy Server URL</button>
+                <button class="copy-btn" onclick="copy('00:1A:79:00:00:00')">Copy MAC</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="adminPortals"></div>
+</div>
+
+<!-- User Management Page -->
+<div class="dashboard hidden" id="users">
+    <button class="back-btn" onclick="goBack()">← Back</button>
+    <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    <div class="logo-circle"><i class="fas fa-users logo-icon"></i></div>
+    <h1 class="title">User Management</h1>
+    
+    <div id="userList"></div>
+</div>
+
+<!-- Tutorial Videos Page -->
+<div class="dashboard hidden" id="videos">
+    <button class="back-btn" onclick="goBack()">← Back</button>
+    <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    <div class="logo-circle"><i class="fas fa-video logo-icon"></i></div>
+    <h1 class="title">Tutorial Videos</h1>
+    
+    <!-- Add Video Button (Admin only) -->
+    <button class="add-video-btn" id="addVideoBtn" style="display:none" onclick="toggleVideoForm()">
+        <i class="fas fa-plus"></i> Add New Video
+    </button>
+    
+    <!-- Add Video Form (Admin only) -->
+    <div class="video-form" id="videoForm" style="display:none">
+        <h3 style="color:#00ffff;margin-bottom:12px; font-size:0.95rem">Add New Video</h3>
+        
+        <!-- Video Source Choice -->
+        <div class="video-source-choice">
+            <label class="source-option">
+                <input type="radio" name="videoSource" id="youtubeSource" value="youtube" checked onchange="toggleVideoSource()">
+                <span><i class="fab fa-youtube"></i> YouTube</span>
+            </label>
+            <label class="source-option">
+                <input type="radio" name="videoSource" id="localSource" value="local" onchange="toggleVideoSource()">
+                <span><i class="fas fa-upload"></i> Upload Video</span>
+            </label>
+        </div>
+        
+        <!-- YouTube Fields -->
+        <div id="youtubeFields">
+            <input type="text" id="videoTitle" placeholder="Video Title">
+            <textarea id="videoDescription" placeholder="Video Description"></textarea>
+            <input type="text" id="videoUrl" placeholder="YouTube URL (e.g., https://www.youtube.com/watch?v=...)">
+            <input type="text" id="videoThumbnail" placeholder="Thumbnail URL (optional)">
+        </div>
+        
+        <!-- Local Video Fields -->
+        <div id="localFields" style="display:none">
+            <input type="text" id="localVideoTitle" placeholder="Video Title">
+            <textarea id="localVideoDescription" placeholder="Video Description"></textarea>
+            
+            <div class="file-input-container">
+                <label class="file-input-label">Choose Video File</label>
+                <input type="file" id="videoFile" class="file-input" accept="video/*" onchange="handleVideoUpload(event)">
+                <div class="upload-info">Maximum file size: 50MB</div>
+            </div>
+        </div>
+        
+        <div class="video-form-buttons">
+            <button class="save-video-btn" onclick="saveVideo()">Save Video</button>
+            <button class="cancel-video-btn" onclick="toggleVideoForm()">Cancel</button>
+        </div>
+    </div>
+    
+    <!-- Videos List -->
+    <div id="videosList"></div>
+</div>
+
+<!-- Video Player -->
+<div class="video-player-overlay hidden" id="videoPlayer">
+    <div class="video-player-container">
+        <div class="video-player-header">
+            <div class="video-player-title" id="playerTitle">Video Title</div>
+            <button class="close-player" onclick="closeVideoPlayer()">
+                <i class="fas fa-times"></i> Close
+            </button>
+        </div>
+        <div class="video-player-content" id="playerContent">
+            <!-- Video will be added here dynamically -->
+        </div>
+        <div class="video-player-description" id="playerDescription">
+            Video Description
+        </div>
+    </div>
+</div>
+
+<div class="notif" id="notif">Done!</div>
+
+<script>
+// Application variables
+let previousPage = 'dash';
+
+function h(s){
+    let a = 0;
+    for(let i = 0; i < s.length; i++) {
+        a = (a << 5) - a + s.charCodeAt(i);
+        a = a & a;
+    }
+    return a.toString(16);
+}
+
+const S = "AHMEDTECH2025_VIP";
+const K = "ahmedtech_portal";
+const PORTALS_KEY = "ahmedtech_portals";
+const VIDEOS_KEY = "ahmedtech_videos";
+const LOCAL_VIDEOS_KEY = "ahmedtech_local_videos";
+let users = JSON.parse(localStorage.getItem(K)) || {};
+let portals = JSON.parse(localStorage.getItem(PORTALS_KEY)) || [];
+let videos = JSON.parse(localStorage.getItem(VIDEOS_KEY)) || [];
+let localVideos = JSON.parse(localStorage.getItem(LOCAL_VIDEOS_KEY)) || [];
+let currentUser = null;
+
+// Create admin account if not exists
+if(!users.admin){
+    users.admin = {p: h("admin123" + S), r: "admin"};
+    localStorage.setItem(K, JSON.stringify(users));
+}
+
+// Update date and time function
+function updateDateTime() {
+    const now = new Date();
+    
+    // Format date
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const dateString = now.toLocaleDateString('en-US', options);
+    
+    // Format time
+    const timeString = now.toLocaleTimeString('en-US', { 
+        hour12: true, 
+        hour: '2-digit', 
+        minute: '2-digit',
+        second: '2-digit'
+    });
+    
+    // Update all date and time elements
+    const dateElements = document.querySelectorAll('.current-date');
+    const timeElements = document.querySelectorAll('.current-time');
+    
+    dateElements.forEach(el => el.textContent = dateString);
+    timeElements.forEach(el => el.textContent = timeString);
+}
+
+// Initialize date and time
+updateDateTime();
+setInterval(updateDateTime, 1000);
+
+// Load portals
+function loadPortals() {
+    const adminPortalsDiv = document.getElementById('adminPortals');
+    adminPortalsDiv.innerHTML = '';
+    
+    portals.forEach((portal, index) => {
+        const portalDiv = document.createElement('div');
+        portalDiv.className = 'mac-item';
+        portalDiv.innerHTML = `
+            <button class="delete-portal-btn" onclick="deletePortal(${index})">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 class="section-title">${portal.name}</h3>
+            
+            <div class="server-mac-box">
+                <div class="server-url">${portal.server}</div>
+                <div class="mac-address">${portal.mac}</div>
+                
+                <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copy('${portal.server}')">Copy Server URL</button>
+                    <button class="copy-btn" onclick="copy('${portal.mac}')">Copy MAC</button>
+                </div>
+            </div>
+        `;
+        adminPortalsDiv.appendChild(portalDiv);
+    });
+}
+
+// Toggle video source
+function toggleVideoSource() {
+    const youtubeSource = document.getElementById('youtubeSource');
+    const youtubeFields = document.getElementById('youtubeFields');
+    const localFields = document.getElementById('localFields');
+    
+    if (youtubeSource.checked) {
+        youtubeFields.style.display = 'block';
+        localFields.style.display = 'none';
+    } else {
+        youtubeFields.style.display = 'none';
+        localFields.style.display = 'block';
+    }
+}
+
+// Handle video upload
+function handleVideoUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    // Check file type
+    const validTypes = ['video/mp4', 'video/webm', 'video/ogg', 'video/quicktime', 'video/x-msvideo'];
+    if (!validTypes.includes(file.type)) {
+        n('Please select a valid video file (MP4, WebM, OGG, etc.)', '#ff4444');
+        event.target.value = '';
+        return;
+    }
+    
+    // Check file size (max 50MB)
+    const maxSize = 50 * 1024 * 1024; // 50MB
+    if (file.size > maxSize) {
+        n('Video file is too large. Maximum size is 50MB', '#ff4444');
+        event.target.value = '';
+        return;
+    }
+    
+    n(`Video selected: ${file.name}`, '#0088ff');
+}
+
+// Load videos
+function loadVideos() {
+    const videosListDiv = document.getElementById('videosList');
+    videosListDiv.innerHTML = '';
+    
+    const allVideos = [
+        ...videos.map(v => ({...v, isLocal: false})),
+        ...localVideos.map(v => ({...v, isLocal: true}))
+    ];
+    
+    if (allVideos.length === 0) {
+        videosListDiv.innerHTML = '<p class="empty-users">No videos available yet</p>';
+        return;
+    }
+    
+    allVideos.forEach((video, index) => {
+        const isLocalVideo = video.isLocal;
+        const videoDiv = document.createElement('div');
+        videoDiv.className = 'video-item';
+        
+        // Add delete button for admin only
+        const deleteButton = currentUser && users[currentUser].r === "admin" ? 
+            `<button class="delete-video-btn" onclick="deleteVideo(${index}, ${isLocalVideo})">
+                <i class="fas fa-times"></i>
+            </button>` : '';
+        
+        let thumbnailContent = '';
+        let videoActions = '';
+        
+        if (isLocalVideo) {
+            // Local video
+            thumbnailContent = `
+                <div class="video-preview" onclick="playLocalVideo(${index})">
+                    <div style="width:100%;height:100%;background:linear-gradient(45deg,#0088ff,#00aaff);display:flex;flex-direction:column;justify-content:center;align-items:center;color:white;">
+                        <i class="fas fa-film" style="font-size:3rem;margin-bottom:10px;"></i>
+                        <div>${video.title}</div>
+                    </div>
+                    <div class="play-overlay">
+                        <i class="fas fa-play play-icon"></i>
+                    </div>
+                </div>
+            `;
+            
+            videoActions = `
+                <div class="video-actions">
+                    <button class="watch-btn" onclick="playLocalVideo(${index})">
+                        <i class="fas fa-play"></i> Play Video
+                    </button>
+                </div>
+            `;
+        } else {
+            // YouTube video
+            const youtubeId = extractYouTubeId(video.url);
+            const thumbnail = video.thumbnail || (youtubeId ? `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg` : '');
+            
+            thumbnailContent = thumbnail ? `
+                <div class="video-preview" onclick="playVideo(${index})">
+                    <img src="${thumbnail}" alt="${video.title}" onerror="this.style.display='none'">
+                    <div class="play-overlay">
+                        <i class="fas fa-play play-icon"></i>
+                    </div>
+                </div>
+            ` : '';
+            
+            videoActions = `
+                <div class="video-actions">
+                    <button class="watch-btn" onclick="playVideo(${index})">
+                        <i class="fas fa-play"></i> Play Video
+                    </button>
+                </div>
+            `;
+        }
+        
+        videoDiv.innerHTML = `
+            ${deleteButton}
+            ${isLocalVideo ? '<span class="local-video-indicator">Local</span>' : ''}
+            <div class="video-title">${video.title}</div>
+            <div class="video-description">${video.description}</div>
+            ${thumbnailContent}
+            ${videoActions}
+        `;
+        videosListDiv.appendChild(videoDiv);
+    });
+}
+
+// Extract YouTube ID from URL
+function extractYouTubeId(url) {
+    if (!url) return '';
+    
+    const patterns = [
+        /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/,
+        /youtube\.com\/embed\/([^"&?\/\s]{11})/,
+        /youtube\.com\/watch\?v=([^"&?\/\s]{11})/
+    ];
+    
+    for (const pattern of patterns) {
+        const match = url.match(pattern);
+        if (match) return match[1];
+    }
+    
+    return '';
+}
+
+// Play video (YouTube)
+function playVideo(index) {
+    const video = videos[index];
+    const player = document.getElementById('videoPlayer');
+    const playerContent = document.getElementById('playerContent');
+    const playerTitle = document.getElementById('playerTitle');
+    const playerDescription = document.getElementById('playerDescription');
+    
+    playerTitle.textContent = video.title;
+    playerDescription.textContent = video.description;
+    
+    const youtubeId = extractYouTubeId(video.url);
+    const embedUrl = youtubeId ? `https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1&autoplay=1` : video.url;
+    
+    if (youtubeId) {
+        playerContent.innerHTML = `
+            <iframe width="100%" height="100%" src="${embedUrl}" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+            </iframe>
+        `;
+    } else {
+        playerContent.innerHTML = `
+            <div class="video-error">
+                <div class="error-message">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Cannot play this video directly
+                </div>
+                <p>You can try opening the link in a new window</p>
+                <a href="${video.url}" target="_blank" class="external-link">
+                    <i class="fas fa-external-link-alt"></i> Open Video in New Window
+                </a>
+            </div>
+        `;
+    }
+    
+    player.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+// Play local video
+function playLocalVideo(index) {
+    const video = localVideos[index];
+    const player = document.getElementById('videoPlayer');
+    const playerContent = document.getElementById('playerContent');
+    const playerTitle = document.getElementById('playerTitle');
+    const playerDescription = document.getElementById('playerDescription');
+    
+    playerTitle.textContent = video.title;
+    playerDescription.textContent = video.description;
+    
+    playerContent.innerHTML = `
+        <video controls autoplay style="width:100%;height:100%;">
+            <source src="${video.data}" type="${video.type}">
+            Your browser does not support the video tag.
+        </video>
+    `;
+    
+    player.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+// Close video player
+function closeVideoPlayer() {
+    const player = document.getElementById('videoPlayer');
+    const playerContent = document.getElementById('playerContent');
+    
+    const iframe = playerContent.querySelector('iframe');
+    const video = playerContent.querySelector('video');
+    
+    if (iframe) iframe.src = '';
+    if (video) {
+        video.pause();
+        video.currentTime = 0;
+    }
+    
+    player.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+}
+
+// Toggle portal form
+function togglePortalForm() {
+    const form = document.getElementById('portalForm');
+    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+}
+
+// Toggle video form
+function toggleVideoForm() {
+    const form = document.getElementById('videoForm');
+    const isShowing = form.style.display === 'block';
+    
+    form.style.display = isShowing ? 'none' : 'block';
+    
+    if (!isShowing) {
+        // Reset fields when opening form
+        document.getElementById('videoTitle').value = '';
+        document.getElementById('videoDescription').value = '';
+        document.getElementById('videoUrl').value = '';
+        document.getElementById('videoThumbnail').value = '';
+        document.getElementById('localVideoTitle').value = '';
+        document.getElementById('localVideoDescription').value = '';
+        document.getElementById('videoFile').value = '';
+        document.getElementById('youtubeSource').checked = true;
+        toggleVideoSource();
+    }
+}
+
+// Save new portal
+function savePortal() {
+    const name = document.getElementById('portalName').value.trim();
+    const server = document.getElementById('portalServer').value.trim();
+    const mac = document.getElementById('portalMac').value.trim();
+    
+    if (!name || !server || !mac) {
+        return n("Please fill all fields", "#ff4444");
+    }
+    
+    portals.push({ name, server, mac });
+    localStorage.setItem(PORTALS_KEY, JSON.stringify(portals));
+    
+    document.getElementById('portalName').value = '';
+    document.getElementById('portalServer').value = '';
+    document.getElementById('portalMac').value = '';
+    
+    togglePortalForm();
+    loadPortals();
+    n("Portal added successfully!");
+}
+
+// Save new video
+function saveVideo() {
+    const youtubeSource = document.getElementById('youtubeSource').checked;
+    let title, description;
+    
+    if (youtubeSource) {
+        title = document.getElementById('videoTitle').value.trim();
+        description = document.getElementById('videoDescription').value.trim();
+    } else {
+        title = document.getElementById('localVideoTitle').value.trim();
+        description = document.getElementById('localVideoDescription').value.trim();
+    }
+    
+    if (!title || !description) {
+        return n("Please fill title and description", "#ff4444");
+    }
+    
+    if (youtubeSource) {
+        // Save YouTube video
+        const url = document.getElementById('videoUrl').value.trim();
+        const thumbnail = document.getElementById('videoThumbnail').value.trim();
+        
+        if (!url) {
+            return n("Please enter YouTube URL", "#ff4444");
+        }
+        
+        if (!extractYouTubeId(url) && !url.includes('youtube.com') && !url.includes('youtu.be')) {
+            if (!confirm("This doesn't seem to be a valid YouTube URL. Do you want to continue?")) {
+                return;
+            }
+        }
+        
+        videos.push({ title, description, url, thumbnail });
+        localStorage.setItem(VIDEOS_KEY, JSON.stringify(videos));
+    } else {
+        // Save local video
+        const fileInput = document.getElementById('videoFile');
+        const file = fileInput.files[0];
+        
+        if (!file) {
+            return n("Please select a video file", "#ff4444");
+        }
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const videoData = {
+                title,
+                description,
+                filename: file.name,
+                type: file.type,
+                size: file.size,
+                data: e.target.result,
+                isLocal: true,
+                uploadedAt: new Date().toISOString()
+            };
+            
+            localVideos.push(videoData);
+            localStorage.setItem(LOCAL_VIDEOS_KEY, JSON.stringify(localVideos));
+            
+            fileInput.value = '';
+            toggleVideoForm();
+            loadVideos();
+            n("Local video added successfully!");
+        };
+        
+        reader.onerror = function() {
+            n("Error reading file", "#ff4444");
+        };
+        
+        reader.readAsDataURL(file);
+        return;
+    }
+    
+    toggleVideoForm();
+    loadVideos();
+    n("Video added successfully!");
+}
+
+// Delete portal
+function deletePortal(index) {
+    if (confirm("Are you sure you want to delete this portal?")) {
+        portals.splice(index, 1);
+        localStorage.setItem(PORTALS_KEY, JSON.stringify(portals));
+        loadPortals();
+        n("Portal deleted");
+    }
+}
+
+// Delete video
+function deleteVideo(index, isLocal) {
+    if (confirm("Are you sure you want to delete this video?")) {
+        if (isLocal) {
+            localVideos.splice(index, 1);
+            localStorage.setItem(LOCAL_VIDEOS_KEY, JSON.stringify(localVideos));
+        } else {
+            videos.splice(index, 1);
+            localStorage.setItem(VIDEOS_KEY, JSON.stringify(videos));
+        }
+        loadVideos();
+        n("Video deleted");
+    }
+}
+
+// Original functions remain with English translations
+document.querySelectorAll('input[name="auth"]').forEach(r => r.onchange = () => {
+    const s = document.querySelector('input[value="signup"]').checked;
+    document.getElementById('confirmDiv').style.display = s ? 'block' : 'none';
+    document.querySelector('.neon-btn').textContent = s ? 'Create Account' : 'Login';
+});
+
+function auth(){
+    const u = document.getElementById("username").value.trim();
+    const p = h(document.getElementById("password").value + S);
+    const s = document.querySelector('input[value="signup"]').checked;
+    
+    if(s){
+        if(document.getElementById("password").value !== document.getElementById("confirmPassword").value)
+            return n("Passwords don't match", "#ff4444");
+        if(users[u]) return n("Username already exists", "#ff4444");
+        users[u] = {p: h(document.getElementById("password").value + S), r: "user"};
+        localStorage.setItem(K, JSON.stringify(users));
+        n("Account created successfully!");
+        document.getElementById("username").value = "";
+        document.getElementById("password").value = "";
+        document.getElementById("confirmPassword").value = "";
+        document.querySelector('input[value="login"]').checked = true;
+        document.getElementById('confirmDiv').style.display = "none";
+        document.querySelector('.neon-btn').textContent = "Login";
+    } else {
+        if(!users[u] || users[u].p !== p) return n("Invalid credentials", "#ff4444");
+        currentUser = u;
+        document.getElementById("welcomeUser").textContent = u;
+        
+        const isAdmin = users[u].r === "admin";
+        document.getElementById("adminSection").style.display = isAdmin ? "block" : "none";
+        document.getElementById("addPortalBtn").style.display = isAdmin ? "block" : "none";
+        document.getElementById("addVideoBtn").style.display = isAdmin ? "block" : "none";
+        
+        if (isAdmin) {
+            loadPortals();
+        }
+        
+        show("dash");
+    }
+}
+
+function forgotPass(){
+    const u = prompt("Enter username:");
+    if(!u || !users[u]) return n("Username not found", "#ff4444");
+    const np = prompt("New password:");
+    if(np && np.length >= 4){
+        users[u].p = h(np + S);
+        localStorage.setItem(K, JSON.stringify(users));
+        n("Password changed successfully!");
+    }
+}
+
+function show(page){
+    const currentPage = document.querySelector('.container:not(.hidden), .dashboard:not(.hidden)').id;
+    if (currentPage !== 'auth') {
+        previousPage = currentPage;
+    }
+    
+    document.querySelectorAll('.container,.dashboard').forEach(e => e.classList.add('hidden'));
+    document.getElementById(page).classList.remove('hidden');
+    
+    if(page === "users") {
+        loadUsers();
+    } else if(page === "videos") {
+        loadVideos();
+    }
+}
+
+function goBack(){
+    show(previousPage);
+}
+
+function loadUsers(){
+    if (!currentUser || users[currentUser].r !== "admin") {
+        n("You are not authorized to access this section", "#ff4444");
+        show('dash');
+        return;
+    }
+    const list = document.getElementById("userList");
+    list.innerHTML = "";
+    for(let u in users){
+        if(u === "admin") continue;
+        const div = document.createElement("div");
+        div.className = "user-card";
+        div.innerHTML = `<div class="user-name">${u}</div><button class="delete-btn" onclick="del('${u}')">Delete</button>`;
+        list.appendChild(div);
+    }
+    if(list.innerHTML === "") list.innerHTML = "<p class='empty-users'>No users yet</p>";
+}
+
+function del(u){
+    if(confirm("Delete user " + u + " permanently?")){
+        delete users[u];
+        localStorage.setItem(K, JSON.stringify(users));
+        n("User deleted");
+        loadUsers();
+    }
+}
+
+function logout(){
+    currentUser = null;
+    show("auth");
+    document.querySelector('input[value="login"]').checked = true;
+    document.getElementById('confirmDiv').style.display = "none";
+    document.querySelector('.neon-btn').textContent = "Login";
+}
+
+function copy(t){
+    navigator.clipboard.writeText(t);
+    n("Copied!");
+}
+
+function n(m, c = "#00ff80"){
+    const x = document.getElementById("notif");
+    x.textContent = m;
+    x.style.background = c;
+    x.style.display = "block";
+    setTimeout(() => { 
+        x.style.display = "none"; 
+        x.style.background = "#00ff80";
+    }, 3000);
+}
+
+// Add some default videos for admin
+if (videos.length === 0) {
+    videos.push({
+        title: "Introduction to IPTV",
+        description: "Basic explanation of IPTV concept and how to use it",
+        url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    });
+    localStorage.setItem(VIDEOS_KEY, JSON.stringify(videos));
+}
+
+// Close video player when pressing ESC
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeVideoPlayer();
+    }
+});
+</script>
+</body>
+</html>
